@@ -1,0 +1,25 @@
+From 29c86435783d2d07e2b2e28b577153529bbcce23 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Florian=20M=C3=A4rkl?= <info@florianmaerkl.de>
+Date: Wed, 15 Apr 2020 12:59:09 +0200
+Subject: [PATCH] Fix a null deref
+
+---
+ src/R2Architecture.cpp | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/R2Architecture.cpp b/src/R2Architecture.cpp
+index f2545f54f9cd..98a935795154 100644
+--- a/src/R2Architecture.cpp
++++ b/src/R2Architecture.cpp
+@@ -114,6 +114,8 @@ void R2Architecture::postSpecFile()
+ 		{
+ 			// Configure noreturn functions
+ 			Funcdata *infd = symboltab->getGlobalScope()->queryFunction(Address(getDefaultCodeSpace(), func->addr));
++			if(!infd)
++				return;
+ 			infd->getFuncProto().setNoReturn(true);
+ 		}
+ 	});
+-- 
+2.26.0
+
