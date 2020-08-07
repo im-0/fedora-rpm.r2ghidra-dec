@@ -12,7 +12,7 @@ Summary:    Integration of the Ghidra decompiler for radare2
 
 License:    LGPLv3+
 URL:        https://github.com/radareorg/r2ghidra-dec
-Source0:    https://github.com/radareorg/r2ghidra-dec/archive/v%{version}.tar.gz/%{name}-%{version}.tar.gz
+Source0:    https://github.com/radareorg/r2ghidra-dec/archive/v%{version}/%{name}-%{version}.tar.gz
 Source1:    https://github.com/thestr4ng3r/ghidra/archive/%{ghidra_commit}/ghidra-%{ghidra_snapshot}.tar.gz
 
 BuildRequires:  cmake
