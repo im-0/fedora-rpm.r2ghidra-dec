@@ -1,18 +1,18 @@
-%global radare2_ver 4.5.0
+%global radare2_ver 4.5.1
 
-%global ghidra_commit          6c10f36f06468f866188cccf960c019779fb9028
+%global ghidra_commit          7bde3b54b43230601363f89b0214ab4bdba8bf6f
 %global ghidra_shortcommit     %(c=%{ghidra_commit}; echo ${c:0:7})
-%global ghidra_checkout_date   20200807
+%global ghidra_checkout_date   20201128
 %global ghidra_snapshot        %{ghidra_checkout_date}git%{ghidra_shortcommit}
 
-Name:       r2ghidra-dec
-Version:    4.5.0
+Name:       r2ghidra
+Version:    4.5.1
 Release:    1%{?dist}
 Summary:    Integration of the Ghidra decompiler for radare2
 
 License:    LGPLv3+
-URL:        https://github.com/radareorg/r2ghidra-dec
-Source0:    https://github.com/radareorg/r2ghidra-dec/archive/v%{version}/%{name}-%{version}.tar.gz
+URL:        https://github.com/radareorg/r2ghidra
+Source0:    https://github.com/radareorg/r2ghidra/archive/v%{version}/r2ghidra-%{version}.tar.gz
 Source1:    https://github.com/thestr4ng3r/ghidra/archive/%{ghidra_commit}/ghidra-%{ghidra_snapshot}.tar.gz
 
 BuildRequires:  cmake
@@ -21,7 +21,7 @@ BuildRequires:  make
 BuildRequires:  bison
 BuildRequires:  flex
 BuildRequires:  pugixml-devel
-BuildRequires:  qt5-devel
+BuildRequires:  qt5-qtbase-devel
 BuildRequires:  radare2-devel = %{radare2_ver}
 BuildRequires:  cutter-re-devel
 
@@ -29,19 +29,19 @@ Requires: radare2 = %{radare2_ver}
 
 
 %description
-r2ghidra-dec is an integration of the Ghidra decompiler for radare2. It
+r2ghidra is an integration of the Ghidra decompiler for radare2. It
 is solely based on the decompiler part of Ghidra, which is written
 entirely in C++, so Ghidra itself is not required at all and the plugin
 can be built self-contained.
 
 
 %package cutter
-Summary:        r2ghidra-dec plugin for Cutter
+Summary:        r2ghidra plugin for Cutter
 Requires:       %{name}%{?_isa} = %{version}-%{release}
 Requires:       cutter-re
 
 %description cutter
-Plugin to use r2ghidra-dec from Cutter UI.
+Plugin to use r2ghidra from Cutter UI.
 
 
 %prep
@@ -86,6 +86,9 @@ mv \
 
 
 %changelog
+* Sat Nov 28 2020 Ivan Mironov <mironov.ivan@gmail.com> - 4.5.1-1
+- Update to 4.5.1
+
 * Fri Aug 07 2020 Ivan Mironov <mironov.ivan@gmail.com> - 4.5.0-1
 - Update to 4.5.0
 

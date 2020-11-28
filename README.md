@@ -1,3 +1,3 @@
-# r2ghidra-dec
+# r2ghidra
 
-The r2ghidra-dec package
+The r2ghidra package
