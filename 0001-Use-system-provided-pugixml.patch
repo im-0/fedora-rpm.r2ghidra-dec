@@ -1,0 +1,40 @@
+From e738a320cbb896e0f6daf955ba532d371fcfca34 Mon Sep 17 00:00:00 2001
+From: Ivan Mironov <mironov.ivan@gmail.com>
+Date: Fri, 15 Oct 2021 21:49:20 +0500
+Subject: [PATCH] Use system-provided pugixml
+
+---
+ src/Makefile | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/src/Makefile b/src/Makefile
+index e02f3a5153d8..cb2ffc9a8a52 100644
+--- a/src/Makefile
++++ b/src/Makefile
+@@ -59,19 +59,19 @@ clean:
+ 
+ plugins: $(R2G_CORE_PLUGIN) $(R2G_ASM_PLUGIN) $(R2G_ANAL_PLUGIN) sleighc
+ 
+-deps=$(R2GHIDRA_OBJS) $(GHIDRA_OBJS) $(R2G_PLUGIN_OBJS) $(PUGIXML_OBJS)
++deps=$(R2GHIDRA_OBJS) $(GHIDRA_OBJS) $(R2G_PLUGIN_OBJS)
+ 
+ $(R2G_CORE_PLUGIN): $(deps)
+-	$(CXX) -shared $(R2_LDFLAGS) $(CXXFLAGS) -o $@ $(R2GHIDRA_OBJS) $(GHIDRA_OBJS) $(PUGIXML_OBJS) core_ghidra.o
++	$(CXX) -shared $(R2_LDFLAGS) $(CXXFLAGS) -o $@ $(R2GHIDRA_OBJS) $(GHIDRA_OBJS) -lpugixml core_ghidra.o
+ 
+ # soname should be used for some oss
+ # $(CXX) -shared -Wl,-soname,core_ghidra.so $(R2_LDFLAGS) $(CXXFLAGS) -o $@ $(R2GHIDRA_OBJS) $(GHIDRA_OBJS) $(PUGIXML_OBJS) core_ghidra.o
+ 
+ $(R2G_ASM_PLUGIN): $(deps)
+-	$(CXX) -shared $(R2_LDFLAGS) $(CXXFLAGS) -o $@ $(R2GHIDRA_OBJS) $(GHIDRA_OBJS) $(PUGIXML_OBJS) asm_ghidra.o
++	$(CXX) -shared $(R2_LDFLAGS) $(CXXFLAGS) -o $@ $(R2GHIDRA_OBJS) $(GHIDRA_OBJS) -lpugixml asm_ghidra.o
+ 
+ $(R2G_ANAL_PLUGIN): $(deps)
+-	$(CXX) -shared $(R2_LDFLAGS) $(CXXFLAGS) -o $@ $(R2GHIDRA_OBJS) $(GHIDRA_OBJS) $(PUGIXML_OBJS) anal_ghidra.o
++	$(CXX) -shared $(R2_LDFLAGS) $(CXXFLAGS) -o $@ $(R2GHIDRA_OBJS) $(GHIDRA_OBJS) -lpugixml anal_ghidra.o
+ 
+ %.o: %.cpp
+ 	$(CXX) -fPIC $(CXXFLAGS) $(R2_CFLAGS) -c $<
+-- 
+2.33.0
+
